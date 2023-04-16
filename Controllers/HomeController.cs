@@ -6,6 +6,7 @@ namespace ELearning.Controllers
     public class HomeController : Controller
     {
         // GET: HomeController
+        // TEST 1
         public ActionResult Index()
         {
             return View();
@@ -34,6 +35,7 @@ namespace ELearning.Controllers
             }
             catch
             {
+            
                 return View();
             }
         }
