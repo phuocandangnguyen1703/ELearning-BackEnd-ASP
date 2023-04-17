@@ -21,6 +21,7 @@ namespace ELearning.Models
 
         public string TypeName { get; set; }
 
+
         [JsonIgnore]
         public virtual ICollection<Course> Courses { get; set; }
 

@@ -30,8 +30,6 @@ namespace ELearning.Models
             get; set;
         }
 
-        public virtual User UserNavigation { get; set; }
-        public virtual Lesson LessonNavigation { get; set; }
 
 
         [JsonIgnore]
@@ -47,6 +45,10 @@ namespace ELearning.Models
         public virtual Require RequireNavigation { get; set; }
         [JsonIgnore]
         public virtual MainType MainTypeNavigation { get; set; }
+        [JsonIgnore]
+        public virtual User UserNavigation { get; set; }
+        [JsonIgnore]
+        public virtual Lesson LessonNavigation { get; set; }
 
 
         public override string ToString()

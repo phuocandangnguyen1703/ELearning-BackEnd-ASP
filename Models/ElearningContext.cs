@@ -13,7 +13,7 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 namespace ELearning.Models
 {
     public partial class ElearningContext : DbContext
-    {
+    {       
         public ElearningContext()
         {
         }
@@ -27,6 +27,8 @@ namespace ELearning.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Learning> Learnings { get; set; }
+        public virtual DbSet<MainType> MainTypes { get; set; }
+        public virtual DbSet<Require> Requires { get; set; }
 
 
         private const string connectionString = @"Server = 112.78.4.41; Port = 3306; UserID = ftisu;Password = ftisu@2022; Database=elearning;";
@@ -70,9 +72,6 @@ namespace ELearning.Models
                 entity.ToTable("users");
 
                 entity.HasKey(e => e.ID);
-
-
-
 
                 entity.Property(e => e.ID).HasColumnName("id");
 
@@ -331,6 +330,7 @@ namespace ELearning.Models
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasColumnName("type_name");
+
 
             });
 

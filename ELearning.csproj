@@ -1,32 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp7.0</TargetFramework>
-  </PropertyGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Text.Json" Version="7.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="7.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="MailKit" Version="4.0.0" />
-    <PackageReference Include="MimeKit" Version="4.0.0" />
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="DTOs\Auth\" />
-    <None Remove="Commons\Constants\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTOs\Auth\" />
-    <Folder Include="Commons\Constants\" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp7.0</TargetFramework>
+		<LangVersion>11</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Text.Json" Version="7.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="7.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+		<PackageReference Include="MailKit" Version="4.0.0" />
+		<PackageReference Include="MimeKit" Version="4.0.0" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+		<PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="DTOs\Auth\" />
+		<None Remove="Commons\Constants\" />
+		<None Remove="DTOs\MainType\" />
+		<None Remove="DTOs\Require\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="DTOs\Auth\" />
+		<Folder Include="Commons\Constants\" />
+		<Folder Include="DTOs\MainType\" />
+		<Folder Include="DTOs\Require\" />
+	</ItemGroup>
 </Project>
