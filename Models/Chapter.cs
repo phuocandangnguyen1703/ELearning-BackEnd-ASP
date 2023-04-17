@@ -17,7 +17,6 @@ namespace ELearning.Models
         }
 
         public int ID { get; set; }
-
         public int CourseID { get; set; }
         public string ChapterName { get; set; }
 

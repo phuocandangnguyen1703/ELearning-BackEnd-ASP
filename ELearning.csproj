@@ -27,11 +27,13 @@
 		<None Remove="Commons\Constants\" />
 		<None Remove="DTOs\MainType\" />
 		<None Remove="DTOs\Require\" />
+		<None Remove="DTOs\Chapter\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="DTOs\Auth\" />
 		<Folder Include="Commons\Constants\" />
 		<Folder Include="DTOs\MainType\" />
 		<Folder Include="DTOs\Require\" />
+		<Folder Include="DTOs\Chapter\" />
 	</ItemGroup>
 </Project>
