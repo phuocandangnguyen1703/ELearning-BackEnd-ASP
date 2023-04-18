@@ -29,6 +29,7 @@ namespace ELearning.Models
         public virtual DbSet<Learning> Learnings { get; set; }
         public virtual DbSet<MainType> MainTypes { get; set; }
         public virtual DbSet<Require> Requires { get; set; }
+        public virtual DbSet<Chapter> Chapters { get; set; }
 
 
         private const string connectionString = @"Server = 112.78.4.41; Port = 3306; UserID = ftisu;Password = ftisu@2022; Database=elearning;";
