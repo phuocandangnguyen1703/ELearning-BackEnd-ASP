@@ -34,6 +34,8 @@ namespace ELearning.Controllers
             return StatusCode(200, Json(list));
         }
 
+
+
         [Route("/main_type/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
@@ -60,11 +62,13 @@ namespace ELearning.Controllers
         {
             MainType newMainType = new();
             newMainType.TypeName = data.TypeName;
-
             await _elearningContext.AddAsync(newMainType);
             await _elearningContext.SaveChangesAsync();
             return StatusCode(200, Json(new { MainType = newMainType }));
         }
+
+
+
     }
 }
 
