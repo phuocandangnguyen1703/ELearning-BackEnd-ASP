@@ -32,7 +32,7 @@ namespace ELearning.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<int>(type: "int", nullable: false),
+                    type = table.Column<int>(type: "int", nullable: false),
                     role_name = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true, collation: "utf8mb4_unicode_520_ci"),
                     role_description = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true, collation: "utf8mb4_unicode_520_ci")
                 },

@@ -13,7 +13,7 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 namespace ELearning.Models
 {
     public partial class ElearningContext : DbContext
-    {       
+    {
         public ElearningContext()
         {
         }
@@ -66,6 +66,25 @@ namespace ELearning.Models
                    .IsUnicode(false)
                    .HasColumnName("role_description");
 
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
+
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -76,30 +95,98 @@ namespace ELearning.Models
 
                 entity.Property(e => e.ID).HasColumnName("id");
 
+                entity.Property(e => e.Role).
+                    HasColumnName("role_id");
+
                 entity.Property(e => e.Username)
                     .HasMaxLength(200)
+                    .IsRequired(true)
                     .IsUnicode(false)
                     .HasColumnName("username");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(200)
+                    .IsRequired(true)
                     .IsUnicode(false)
                     .HasColumnName("email");
 
                 entity.Property(e => e.Password)
                    .HasMaxLength(200)
+                   .IsRequired(true)
                    .IsUnicode(true)
                    .HasColumnName("password");
 
                 entity.Property(e => e.Fullname)
-                .HasMaxLength(200)
+                   .HasMaxLength(200)
+                   .IsRequired(true)
                    .IsUnicode(true)
                    .HasColumnName("fullname");
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(11)
                     .IsUnicode(false)
+
                     .HasColumnName("phone");
+
+                entity.Property(e => e.Biography)
+                    .HasMaxLength(250)
+                    .IsUnicode(true)
+                    .IsRequired(false)
+                    .HasColumnName("biography");
+
+                entity.Property(e => e.Birthday)
+                    .HasMaxLength(6)
+                    .IsRequired(true)
+                    .HasColumnName("birthday");
+
+                entity.Property(e => e.Facebook)
+                    .HasMaxLength(250)
+                    .IsUnicode(true)
+                    .IsRequired(false)
+                    .HasColumnName("facebook");
+
+                entity.Property(e => e.Linkedin)
+                   .HasMaxLength(250)
+                   .IsUnicode(true)
+                   .IsRequired(false)
+                   .HasColumnName("linkedin");
+
+                entity.Property(e => e.Job)
+                   .HasMaxLength(250)
+                   .IsUnicode(true)
+                   .IsRequired(false)
+                   .HasColumnName("job");
+
+                entity.Property(e => e.Avt_img)
+                   .HasMaxLength(2000)
+                   .IsUnicode(true)
+                   .IsRequired(false)
+                   .HasColumnName("avt_img");
+
+                entity.Property(e => e.Background_img)
+                   .HasMaxLength(2000)
+                   .IsUnicode(true)
+                   .IsRequired(false)
+                   .HasColumnName("background_img");
+
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
                 // entity.HasOne(d => d.RoleNavigation)
                 //.WithMany(p => p.Users)
@@ -127,20 +214,36 @@ namespace ELearning.Models
                 entity.Property(e => e.UserID).HasColumnName("user_id");
 
                 entity.Property(e => e.LearnTime)
-                    .HasColumnType("datetime")
+                    .HasColumnType("time")
                     .HasColumnName("learn_time");
-
+               
                 entity.HasOne(d => d.UserNavigation)
                    .WithMany(p => p.Learnings)
                    .HasForeignKey(d => d.UserID)
                    .OnDelete(DeleteBehavior.ClientSetNull);
-                   //.HasConstraintName("FK_LEARNING_REFERENCE_USER");
+                //.HasConstraintName("FK_LEARNING_REFERENCE_USER");
 
                 entity.HasOne(d => d.LessonNavigation)
                  .WithOne(f => f.LearningNavigation)
                  .HasForeignKey<Learning>(d => d.LessonID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_LEARNING_REFERENCE_LESSON");
+                //.HasConstraintName("FK_LEARNING_REFERENCE_LESSON");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
+
             });
 
             modelBuilder.Entity<Lesson>(entity =>
@@ -159,21 +262,42 @@ namespace ELearning.Models
 
                 entity.Property(e => e.LessonName)
                   .HasMaxLength(200)
-                  .IsUnicode(false)
+                  .IsUnicode(true)
                   .HasColumnName("lesson_name");
 
                 entity.Property(e => e.LessonURL)
                   .HasMaxLength(200)
-                  .IsUnicode(false)
+                  .IsUnicode(true)
                   .HasColumnName("lesson _url");
 
-                entity.Property(e => e.Duration).HasColumnName("duration");
+                entity.Property(e => e.Duration)
+                   .HasColumnType("time")
+                   .HasColumnName("duration");
 
                 entity.HasOne(d => d.ChapterNavigation)
                  .WithMany(f => f.Lessons)
                  .HasForeignKey(d => d.ChapterID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_LESSON_REFERENCE_CHAPTER");
+                //.HasConstraintName("FK_LESSON_REFERENCE_CHAPTER");
+
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
             });
 
@@ -199,7 +323,7 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Content)
                   .HasMaxLength(2000)
-                  .IsUnicode(false)
+                  .IsUnicode(true)
                   .HasColumnName("content");
 
 
@@ -207,13 +331,28 @@ namespace ELearning.Models
                  .WithMany(f => f.Reviews)
                  .HasForeignKey(d => d.UserID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_REVIEW_REFERENCE_USER");
+                //.HasConstraintName("FK_REVIEW_REFERENCE_USER");
 
                 entity.HasOne(d => d.CourseNavigation)
                  .WithMany(f => f.Reviews)
-                 .HasForeignKey(d => d.UserID)
+                 .HasForeignKey(d => d.CourseID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_REVIEW_REFERENCE_COURSE");
+                //.HasConstraintName("FK_REVIEW_REFERENCE_COURSE");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
             });
 
@@ -243,7 +382,7 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Reason)
                   .HasMaxLength(200)
-                  .IsUnicode(false)
+                  .IsUnicode(true)
                   .HasColumnName("reason");
 
 
@@ -251,13 +390,32 @@ namespace ELearning.Models
                  .WithMany(f => f.Approvals)
                  .HasForeignKey(d => d.UserID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_APPROVAL_REFERENCE_USER");
+                //.HasConstraintName("FK_APPROVAL_REFERENCE_USER");
 
                 entity.HasOne(d => d.CourseNavigation)
                  .WithMany(f => f.Approvals)
                  .HasForeignKey(d => d.CourseID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_APPROVAL_REFERENCE_COURSE");
+                //.HasConstraintName("FK_APPROVAL_REFERENCE_COURSE");
+
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
             });
 
@@ -277,15 +435,33 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Content)
                   .HasMaxLength(2000)
-                  .IsUnicode(false)
-                  .HasColumnName("reason");
+                  .IsUnicode(true)
+                  .HasColumnName("content");
 
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
                 entity.HasOne(d => d.CourseNavigation)
                  .WithOne(f => f.RequireNavigation)
                  .HasForeignKey<Require>(d => d.CourseID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_REQUIRE_REFERENCE_COURSE");
+                //.HasConstraintName("FK_REQUIRE_REFERENCE_COURSE");
 
             });
 
@@ -305,14 +481,33 @@ namespace ELearning.Models
 
                 entity.Property(e => e.ChapterName)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
+                    .IsUnicode(true)
                     .HasColumnName("chapter_name");
 
                 entity.HasOne(d => d.CourseNavigation)
                  .WithMany(f => f.Chapters)
                  .HasForeignKey(d => d.CourseID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_CHAPTER_REFERENCE_COURSE");
+                //.HasConstraintName("FK_CHAPTER_REFERENCE_COURSE");
+
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
             });
 
@@ -329,8 +524,27 @@ namespace ELearning.Models
 
                 entity.Property(e => e.TypeName)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
+                    .IsUnicode(true)
                     .HasColumnName("type_name");
+
+                entity.Property(e => e.Is_active)
+                    .HasDefaultValueSql("'1'")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
 
             });
@@ -352,12 +566,12 @@ namespace ELearning.Models
 
                 entity.Property(e => e.CourseName)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
+                    .IsUnicode(true)
                     .HasColumnName("course_name");
 
                 entity.Property(e => e.CourseImage)
                     .HasMaxLength(2000)
-                    .IsUnicode(false)
+                    .IsUnicode(true)
                     .HasColumnName("course_image");
 
 
@@ -369,23 +583,41 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Commission)
                 .HasMaxLength(200)
-                .IsUnicode(false)
+                .IsUnicode(true)
                 .HasColumnName("commission");
 
                 entity.HasOne(d => d.AuthorNavigation)
                  .WithMany(f => f.Courses)
                  .HasForeignKey(d => d.AuthorID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_COURSE_REFERENCE_USER");
+                //.HasConstraintName("FK_COURSE_REFERENCE_USER");
 
                 entity.HasOne(d => d.MainTypeNavigation)
                  .WithMany(f => f.Courses)
                  .HasForeignKey(d => d.CourseTypeID)
                  .OnDelete(DeleteBehavior.ClientSetNull);
-                 //.HasConstraintName("FK_COURSE_REFERENCE_MAINTYPE");
+                //.HasConstraintName("FK_COURSE_REFERENCE_MAINTYPE");
+
+                entity.Property(e => e.Is_active)
+                   .HasDefaultValueSql("'1'")
+                   .HasColumnName("is_active");
+
+                entity.Property(e => e.Is_deleted)
+                    .HasColumnName("is_deleted")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
 
             });
-
 
             OnModelCreatingPartial(modelBuilder);
 

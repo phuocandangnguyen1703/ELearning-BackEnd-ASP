@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ELearning;
 using Back.Models;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,7 +27,7 @@ using BC = BCrypt.Net.BCrypt;
 using ELearning.DTOs.Auth;
 using System.Security.Principal;
 
-namespace ELearning.Controllers
+namespace ELearning.Controllers.AdminControllers.AdminAuthControllers
 {
     //[EnableCors(origins: "*", headers: "accept,content-type,origin,x-my-header", methods: "*")]
     [ApiController]

@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ELearning.Commons.Constants;
-using ELearning.DTOs.Chapter;
+using ELearning.DTOs.Course;
 
-namespace ELearning.Controllers
+namespace ELearning.Controllers.AdminControllers.AdminCourseControllers
 {
     [ApiController]
 
@@ -20,7 +20,7 @@ namespace ELearning.Controllers
         {
             _logger = logger;
             _env = env;
-            this._elearningContext = elearningContext;
+            _elearningContext = elearningContext;
         }
 
 
@@ -56,7 +56,7 @@ namespace ELearning.Controllers
 
         [Route("/chapter/create")]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateDTO data)
+        public async Task<IActionResult> Create(ChapterDTO data)
         {
             Chapter newChapter = new();
 

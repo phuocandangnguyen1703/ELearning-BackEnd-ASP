@@ -1,36 +1,38 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel.DataAnnotations.Schema;
-//using Microsoft.EntityFrameworkCore;
-//using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
-//#nullable disable
+#nullable disable
 
-//namespace ELearning.Models
-//{
-//    public partial class Payment
-//    {
+namespace ELearning.Models
+{
+    public partial class Paymemt
+    {
 
-//        public Payment()
-//        {
+        public Paymemt()
+        {
 
-//        }
+        }
+       
 
-//        public int ID { get; set; }
+        public int ID { get; set; }
 
-//        public int UserID { get; set; }
-//        public int EnrollmentID { get; set; }
+        public int CourseID { get; set; }
+        public string Content { get; set; }
+        public int Is_active { get; set; }
+        public int Is_deleted { get; set; }
+        public DateTime Create_at { get; set; }
+        public DateTime Update_at { get; set; }
 
-//        [JsonIgnore]
-//        public virtual ICollection<Lesson> Lessons { get; set; }
+        [JsonIgnore]
+        public virtual Course CourseNavigation { get; set; }
 
-//        [JsonIgnore]
-//        public virtual Course CourseNavigation { get; set; }
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
 
-//        public override string ToString()
-//        {
-//            return JsonConvert.SerializeObject(this);
-//        }
-
-//    }
-//}
+    }
+}
