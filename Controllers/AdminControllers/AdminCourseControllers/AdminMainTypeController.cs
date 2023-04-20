@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ELearning.Commons.Constants;
-using ELearning.DTOs.MainType;
+using ELearning.DTOs.Course;
 
 namespace ELearning.Controllers
 {
     [ApiController]
 
-    public class MainTypeController : Controller
+    public class AdminMainTypeController : Controller
     {
-        private readonly ILogger<MainTypeController> _logger;
+        private readonly ILogger<AdminMainTypeController> _logger;
         private readonly IWebHostEnvironment _env;
         private readonly ElearningContext _elearningContext;
-        public MainTypeController(ILogger<MainTypeController> logger, IWebHostEnvironment env, ElearningContext elearningContext)
+        public AdminMainTypeController(ILogger<AdminMainTypeController> logger, IWebHostEnvironment env, ElearningContext elearningContext)
         {
             _logger = logger;
             _env = env;
@@ -33,8 +33,6 @@ namespace ELearning.Controllers
                               select n).ToListAsync();
             return StatusCode(200, Json(list));
         }
-
-
 
         [Route("/main_type/delete/{id}")]
         [HttpDelete]
@@ -58,17 +56,15 @@ namespace ELearning.Controllers
 
         [Route("/main_type/create")]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateDTO data)
+        public async Task<IActionResult> Create(MainTypeDTO data)
         {
             MainType newMainType = new();
             newMainType.TypeName = data.TypeName;
+
             await _elearningContext.AddAsync(newMainType);
             await _elearningContext.SaveChangesAsync();
             return StatusCode(200, Json(new { MainType = newMainType }));
         }
-
-
-
     }
 }
 

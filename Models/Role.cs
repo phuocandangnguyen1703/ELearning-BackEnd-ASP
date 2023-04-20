@@ -28,6 +28,10 @@ namespace ELearning.Models
         public EROLE Type { get; set; }
         public string RoleName { get; set; }
         public string RoleDescription { get; set; }
+        public int Is_active { get; set; }
+        public int Is_deleted { get; set; }
+        public DateTime Create_at { get; set; }
+        public DateTime Update_at { get; set; }
 
         //[JsonIgnore]
         //public virtual ICollection<User> Users { get; set; }

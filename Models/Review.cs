@@ -22,6 +22,10 @@ namespace ELearning.Models
         public int CourseID { get; set; }
         public int CourseReviewState { get; set; }
         public string Content { get; set; }
+        public int Is_deleted { get; set; }
+        public DateTime Create_at { get; set; }
+        public DateTime Update_at { get; set; }
+
 
         [JsonIgnore]
         public virtual User UserNavigation { get; set; }

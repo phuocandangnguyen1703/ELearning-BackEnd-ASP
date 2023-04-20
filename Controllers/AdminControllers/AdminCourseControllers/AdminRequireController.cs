@@ -5,22 +5,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ELearning.Commons.Constants;
-using ELearning.DTOs.Require;
+using ELearning.DTOs.Course;
 
-namespace ELearning.Controllers
+namespace ELearning.Controllers.AdminControllers.AdminCourseControllers
 {
     [ApiController]
 
-    public class RequireController : Controller
+    public class AdminRequireController : Controller
     {
-        private readonly ILogger<RequireController> _logger;
+        private readonly ILogger<AdminRequireController> _logger;
         private readonly IWebHostEnvironment _env;
         private readonly ElearningContext _elearningContext;
-        public RequireController(ILogger<RequireController> logger, IWebHostEnvironment env, ElearningContext elearningContext)
+        public AdminRequireController(ILogger<AdminRequireController> logger, IWebHostEnvironment env, ElearningContext elearningContext)
         {
             _logger = logger;
             _env = env;
-            this._elearningContext = elearningContext;
+            _elearningContext = elearningContext;
         }
 
 
@@ -56,7 +56,7 @@ namespace ELearning.Controllers
 
         [Route("/require/create")]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateDTO data)
+        public async Task<IActionResult> Create(RequireDTO data)
         {
             Require newRequire = new();
 

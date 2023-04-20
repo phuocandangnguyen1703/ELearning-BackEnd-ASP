@@ -3,6 +3,7 @@ using System;
 using ELearning.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearning.Migrations
 {
     [DbContext(typeof(ElearningContext))]
-    partial class ElearningContextModelSnapshot : ModelSnapshot
+    [Migration("20230419172805_Edit_Table_Users")]
+    partial class Edit_Table_Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,39 +38,15 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("course_id");
 
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("is_accepted");
 
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
                     b.Property<bool>("Reason")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("tinyint(200)")
                         .HasColumnName("reason");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int")
@@ -91,37 +70,13 @@ namespace ELearning.Migrations
 
                     b.Property<string>("ChapterName")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(200)")
                         .HasColumnName("chapter_name");
 
                     b.Property<int>("CourseID")
                         .HasColumnType("int")
                         .HasColumnName("course_id");
-
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("ID");
 
@@ -142,7 +97,7 @@ namespace ELearning.Migrations
 
                     b.Property<int>("Commission")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("int")
                         .HasColumnName("commission");
 
@@ -152,13 +107,13 @@ namespace ELearning.Migrations
 
                     b.Property<string>("CourseImage")
                         .HasMaxLength(2000)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(2000)")
                         .HasColumnName("course_image");
 
                     b.Property<string>("CourseName")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(200)")
                         .HasColumnName("course_name");
 
@@ -170,35 +125,11 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("course_type_id");
 
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
                     b.Property<int?>("LessonNavigationID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int?>("UserNavigationID")
                         .HasColumnType("int");
@@ -223,20 +154,8 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
-                    b.Property<TimeSpan>("LearnTime")
-                        .HasColumnType("time")
+                    b.Property<DateTime>("LearnTime")
+                        .HasColumnType("datetime")
                         .HasColumnName("learn_time");
 
                     b.Property<int>("LessonID")
@@ -244,12 +163,6 @@ namespace ELearning.Migrations
                         .IsUnicode(false)
                         .HasColumnType("int")
                         .HasColumnName("lesson_id");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int")
@@ -276,45 +189,21 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("chapter_id");
 
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time")
+                    b.Property<int>("Duration")
+                        .HasColumnType("int")
                         .HasColumnName("duration");
-
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
 
                     b.Property<string>("LessonName")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(200)")
                         .HasColumnName("lesson_name");
 
                     b.Property<string>("LessonURL")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(200)")
                         .HasColumnName("lesson _url");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("ID");
 
@@ -330,35 +219,11 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
                     b.Property<string>("TypeName")
                         .HasMaxLength(200)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(200)")
                         .HasColumnName("type_name");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("ID");
 
@@ -374,37 +239,13 @@ namespace ELearning.Migrations
 
                     b.Property<string>("Content")
                         .HasMaxLength(2000)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(2000)")
-                        .HasColumnName("content");
+                        .HasColumnName("reason");
 
                     b.Property<int>("CourseID")
                         .HasColumnType("int")
                         .HasColumnName("course_id");
-
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("ID");
 
@@ -423,7 +264,7 @@ namespace ELearning.Migrations
 
                     b.Property<string>("Content")
                         .HasMaxLength(2000)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(2000)")
                         .HasColumnName("content");
 
@@ -435,31 +276,11 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("course_review_state");
 
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
                     b.Property<int>("UserID")
                         .HasColumnType("int")
                         .HasColumnName("user_id");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CourseID");
 
                     b.HasIndex("UserID");
 
@@ -472,24 +293,6 @@ namespace ELearning.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id");
-
-                    b.Property<DateTime>("Create_at")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Is_active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("Is_deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
 
                     b.Property<string>("RoleDescription")
                         .HasMaxLength(200)
@@ -506,12 +309,6 @@ namespace ELearning.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
                     b.HasKey("ID");
 
                     b.ToTable("roles", (string)null);
@@ -524,35 +321,23 @@ namespace ELearning.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<string>("Avt_img")
-                        .HasMaxLength(2000)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(2000)")
-                        .HasColumnName("avt_img");
-
-                    b.Property<string>("Background_img")
-                        .HasMaxLength(2000)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(2000)")
-                        .HasColumnName("background_img");
-
                     b.Property<string>("Biography")
                         .HasMaxLength(250)
-                        .IsUnicode(true)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(250)")
                         .HasColumnName("biography");
 
-                    b.Property<DateTime?>("Birthday")
-                        .IsRequired()
-                        .HasMaxLength(6)
+                    b.Property<DateTime>("Birthday")
+                        .IsUnicode(false)
                         .HasColumnType("datetime(6)")
                         .HasColumnName("birthday");
 
                     b.Property<DateTime>("Create_at")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("create_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .IsUnicode(false)
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 4, 20, 0, 28, 5, 22, DateTimeKind.Local).AddTicks(8766))
+                        .HasColumnName("create_at");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -561,13 +346,10 @@ namespace ELearning.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("email");
 
-                    b.Property<string>("Email_verified_at")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Facebook")
-                        .HasMaxLength(250)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(250)")
+                        .HasMaxLength(11)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(11)")
                         .HasColumnName("facebook");
 
                     b.Property<string>("Fullname")
@@ -579,27 +361,17 @@ namespace ELearning.Migrations
 
                     b.Property<int>("Is_active")
                         .ValueGeneratedOnAdd()
+                        .IsUnicode(false)
                         .HasColumnType("int")
-                        .HasColumnName("is_active")
-                        .HasDefaultValueSql("'1'");
+                        .HasDefaultValue(1)
+                        .HasColumnName("is_active");
 
                     b.Property<int>("Is_deleted")
                         .ValueGeneratedOnAdd()
+                        .IsUnicode(false)
                         .HasColumnType("int")
-                        .HasColumnName("is_deleted")
-                        .HasDefaultValueSql("'0'");
-
-                    b.Property<string>("Job")
-                        .HasMaxLength(250)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(250)")
-                        .HasColumnName("job");
-
-                    b.Property<string>("Linkedin")
-                        .HasMaxLength(250)
-                        .IsUnicode(true)
-                        .HasColumnType("varchar(250)")
-                        .HasColumnName("linkedin");
+                        .HasDefaultValue(0)
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -615,14 +387,14 @@ namespace ELearning.Migrations
                         .HasColumnName("phone");
 
                     b.Property<int>("Role")
-                        .HasColumnType("int")
-                        .HasColumnName("role_id");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Update_at")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("update_at")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .ValueGeneratedOnAdd()
+                        .IsUnicode(false)
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 4, 20, 0, 28, 5, 22, DateTimeKind.Local).AddTicks(9035))
+                        .HasColumnName("update_at");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -733,7 +505,7 @@ namespace ELearning.Migrations
                 {
                     b.HasOne("ELearning.Models.Course", "CourseNavigation")
                         .WithMany("Reviews")
-                        .HasForeignKey("CourseID")
+                        .HasForeignKey("UserID")
                         .IsRequired();
 
                     b.HasOne("ELearning.Models.User", "UserNavigation")

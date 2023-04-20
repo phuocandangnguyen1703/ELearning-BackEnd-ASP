@@ -24,6 +24,13 @@ namespace ELearning.Models
         public bool IsAccepted { get; set; }
         public bool Reason { get; set; }
 
+        public int Is_active { get; set; }
+        public int Is_deleted { get; set; }
+        public DateTime Create_at { get; set; }
+        public DateTime Update_at { get; set; }
+
+
+
 
         public virtual User UserNavigation { get; set; }
         public virtual Course CourseNavigation { get; set; }

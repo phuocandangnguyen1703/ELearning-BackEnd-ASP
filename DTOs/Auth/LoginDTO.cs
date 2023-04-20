@@ -6,7 +6,8 @@
 		{
 		}
 		public string username;
-		public string password;
+		public int role;
+        public string password;
 	}
 }
 
