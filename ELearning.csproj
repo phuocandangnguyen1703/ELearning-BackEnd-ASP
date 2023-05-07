@@ -26,10 +26,12 @@
 		<None Remove="DTOs\MainType\" />
 		<None Remove="DTOs\Require\" />
 		<None Remove="DTOs\Chapter\" />
+		<None Remove="Controllers\AdminControllers\AdminLessonsControllers\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Commons\Constants\" />
 		<Folder Include="Controllers\CommonControllers\" />
 		<Folder Include="Controllers\WebsiteControllers\" />
+		<Folder Include="Controllers\AdminControllers\AdminLessonsControllers\" />
 	</ItemGroup>
 </Project>

@@ -3,7 +3,6 @@
 using ELearning.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using ELearning.Commons.Constants;
 using ELearning.DTOs.Course;
 
@@ -24,37 +23,38 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCha
         }
 
 
-        [Route("/chapter/all")]
+        [Route("admin/courses/chapters/all")]
         [HttpGet]
         public async Task<IActionResult> All()
         {
             var list = await (from n in _elearningContext.Chapters
                               orderby n.ID ascending
                               select n).ToListAsync();
-            return StatusCode(200, Json(list));
+            return StatusCode(200, (list));
         }
 
-        [Route("/chapter/delete/{id}")]
+        [Route("admin/courses/chapters/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var s = await _elearningContext.Chapters.SingleAsync(x => x.ID == id);
             _elearningContext.Remove(s);
-            return StatusCode(200, Json(ErrorCode.SUCCESS));
+            await _elearningContext.SaveChangesAsync();
+            return StatusCode(200, s);
         }
 
-        [Route("/chapter/find/{id}")]
+        [Route("admin/courses/chapters/find/{id}")]
         [HttpGet]
         public async Task<IActionResult> Find([FromRoute] int id)
         {
-            var ChapterData = await (from x in _elearningContext.Chapters
+            var chapterData = await (from x in _elearningContext.Chapters
                                      where x.ID == id
                                      select x).FirstOrDefaultAsync();
-            if (ChapterData == null) return StatusCode(404);
-            return StatusCode(200, Json(new { Chapter = ChapterData }));
+            if (chapterData == null) return StatusCode(404);
+            return StatusCode(200, chapterData);
         }
 
-        [Route("/chapter/create")]
+        [Route("admin/courses/chapters/create")]
         [HttpPost]
         public async Task<IActionResult> Create(ChapterDTO data)
         {
@@ -65,7 +65,7 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCha
 
             await _elearningContext.AddAsync(newChapter);
             await _elearningContext.SaveChangesAsync();
-            return StatusCode(200, Json(new { Chapter = newChapter }));
+            return StatusCode(200, newChapter);
         }
     }
 }

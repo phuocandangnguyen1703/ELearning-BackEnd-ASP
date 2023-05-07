@@ -22,17 +22,19 @@ namespace ELearning.Controllers.AdminControllers.AdminUserControllers
         }
 
 
-        [Route("admin/role/all")]
+        [Route("api/admin/role/all")]
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var list = await (from n in _elearningContext.Roles
+           
+             var list = await (from n in _elearningContext.Roles
                               orderby n.ID ascending
-                              select n).ToListAsync();
-            return StatusCode(200, Json(list));
+                              select n).ToArrayAsync();
+
+            return StatusCode(200, list);
         }
 
-        [Route("admin/role/delete/{id}")]
+        [Route("/role/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
@@ -41,7 +43,7 @@ namespace ELearning.Controllers.AdminControllers.AdminUserControllers
             return StatusCode(200, Json(ErrorCode.SUCCESS));
         }
 
-        [Route("admin/role/find/{id}")]
+        [Route("/role/find/{id}")]
         [HttpGet]
         public async Task<IActionResult> Find([FromRoute] int id)
         {
@@ -52,12 +54,13 @@ namespace ELearning.Controllers.AdminControllers.AdminUserControllers
             return StatusCode(200, Json(new { MainType = mainTypeData }));
         }
 
-        [Route("admin/role/create")]
+        [Route("api/admin/role/create")]
         [HttpPost]
         public async Task<IActionResult> Create(Role data)
         {
             Role newRole = new();
             newRole.Type = data.Type;
+            newRole.RoleName  = data.RoleName;
             newRole.RoleDescription = data.RoleDescription;
 
             await _elearningContext.AddAsync(newRole);

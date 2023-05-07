@@ -30,6 +30,7 @@ namespace ELearning.Models
         public virtual DbSet<MainType> MainTypes { get; set; }
         public virtual DbSet<Require> Requires { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
+        public virtual DbSet<Lesson> Lessons{ get; set; }
         public virtual DbSet<Course> Courses { get; set; }
 
 
@@ -272,7 +273,6 @@ namespace ELearning.Models
                   .HasColumnName("lesson _url");
 
                 entity.Property(e => e.Duration)
-                   .HasColumnType("time")
                    .HasColumnName("duration");
 
                 entity.HasOne(d => d.ChapterNavigation)
