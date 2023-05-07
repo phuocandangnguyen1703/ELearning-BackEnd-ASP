@@ -7,10 +7,10 @@ namespace ELearning.DTOs.Course
         {
         }
         public int ID { get; set; }
-        public int AuthorID { get; set; }
+        //public int AuthorID { get; set; }
         public int CourseTypeID { get; set; }
         public string CourseName { get; set; }
-        public string CourseImage { get; set; }
+        //public string CourseImage { get; set; }
         public int CourseFee { get; set; }
         public string Description { get; set; }
         public int CourseState { get; set; }

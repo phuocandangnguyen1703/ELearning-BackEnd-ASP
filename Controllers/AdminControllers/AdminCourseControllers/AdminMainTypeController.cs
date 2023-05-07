@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using ELearning.Commons.Constants;
 using ELearning.DTOs.Course;
 
-namespace ELearning.Controllers
+namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminRequireController
 {
     [ApiController]
 
@@ -24,26 +24,27 @@ namespace ELearning.Controllers
         }
 
 
-        [Route("/main_type/all")]
+        [Route("admin/course/main_type/all")]
         [HttpGet]
         public async Task<IActionResult> All()
         {
             var list = await (from n in _elearningContext.MainTypes
                               orderby n.ID ascending
                               select n).ToListAsync();
-            return StatusCode(200, Json(list));
+            return StatusCode(200, (list));
         }
 
-        [Route("/main_type/delete/{id}")]
+        [Route("admin/course/main_type/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var s = await _elearningContext.MainTypes.SingleAsync(x => x.ID == id);
             _elearningContext.Remove(s);
-            return StatusCode(200, Json(ErrorCode.SUCCESS));
+            await _elearningContext.SaveChangesAsync();
+            return StatusCode(200, s);
         }
 
-        [Route("/main_type/find/{id}")]
+        [Route("admin/course/main_type/find/{id}")]
         [HttpGet]
         public async Task<IActionResult> Find([FromRoute] int id)
         {
@@ -54,7 +55,7 @@ namespace ELearning.Controllers
             return StatusCode(200, Json(new { MainType = mainTypeData }));
         }
 
-        [Route("/main_type/create")]
+        [Route("admin/course/main_type/create")]
         [HttpPost]
         public async Task<IActionResult> Create(MainTypeDTO data)
         {
@@ -63,7 +64,7 @@ namespace ELearning.Controllers
 
             await _elearningContext.AddAsync(newMainType);
             await _elearningContext.SaveChangesAsync();
-            return StatusCode(200, Json(new { MainType = newMainType }));
+            return StatusCode(200, newMainType);
         }
     }
 }

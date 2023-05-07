@@ -17,7 +17,7 @@ namespace ELearning.Models
         }
 
         public int ID { get; set; }
-        public int AuthorID { get; set; }
+        //public int AuthorID { get; set; }
         public int CourseTypeID { get; set; }
         public string CourseName { get; set; }
         public string CourseImage { get; set; }
@@ -38,8 +38,8 @@ namespace ELearning.Models
         [JsonIgnore]
         public virtual ICollection<Review> Reviews { get; set; }
 
-        [JsonIgnore]
-        public virtual User AuthorNavigation { get; set; }
+        //[JsonIgnore]
+        //public virtual User AuthorNavigation { get; set; }
         [JsonIgnore]
         public virtual Require RequireNavigation { get; set; }
         [JsonIgnore]

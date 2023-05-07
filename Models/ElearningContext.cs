@@ -30,6 +30,7 @@ namespace ELearning.Models
         public virtual DbSet<MainType> MainTypes { get; set; }
         public virtual DbSet<Require> Requires { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
 
 
         private const string connectionString = @"Server = 112.78.4.41; Port = 3306; UserID = ftisu;Password = ftisu@2022; Database=elearning;";
@@ -67,12 +68,12 @@ namespace ELearning.Models
                    .HasColumnName("role_description");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -170,12 +171,12 @@ namespace ELearning.Models
                    .HasColumnName("background_img");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -231,7 +232,7 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -281,12 +282,12 @@ namespace ELearning.Models
                 //.HasConstraintName("FK_LESSON_REFERENCE_CHAPTER");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -341,7 +342,7 @@ namespace ELearning.Models
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -399,12 +400,12 @@ namespace ELearning.Models
                 //.HasConstraintName("FK_APPROVAL_REFERENCE_COURSE");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -439,12 +440,12 @@ namespace ELearning.Models
                   .HasColumnName("content");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -491,12 +492,12 @@ namespace ELearning.Models
                 //.HasConstraintName("FK_CHAPTER_REFERENCE_COURSE");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -528,12 +529,12 @@ namespace ELearning.Models
                     .HasColumnName("type_name");
 
                 entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("'1'")
+                    .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -586,10 +587,10 @@ namespace ELearning.Models
                 .IsUnicode(true)
                 .HasColumnName("commission");
 
-                entity.HasOne(d => d.AuthorNavigation)
-                 .WithMany(f => f.Courses)
-                 .HasForeignKey(d => d.AuthorID)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
+                //entity.HasOne(d => d.AuthorNavigation)
+                // .WithMany(f => f.Courses)
+                // .HasForeignKey(d => d.AuthorID)
+                // .OnDelete(DeleteBehavior.ClientSetNull);
                 //.HasConstraintName("FK_COURSE_REFERENCE_USER");
 
                 entity.HasOne(d => d.MainTypeNavigation)
@@ -599,12 +600,12 @@ namespace ELearning.Models
                 //.HasConstraintName("FK_COURSE_REFERENCE_MAINTYPE");
 
                 entity.Property(e => e.Is_active)
-                   .HasDefaultValueSql("'1'")
+                   .HasDefaultValueSql("1")
                    .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
-                    .HasDefaultValueSql("'0'");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")

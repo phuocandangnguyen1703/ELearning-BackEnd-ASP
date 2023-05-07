@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using ELearning.Commons.Constants;
 using ELearning.DTOs.Course;
 
-namespace ELearning.Controllers.AdminControllers.AdminCourseControllers
+namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminChapterController
 {
     [ApiController]
 
