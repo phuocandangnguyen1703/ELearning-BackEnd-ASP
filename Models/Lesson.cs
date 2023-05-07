@@ -20,7 +20,7 @@ namespace ELearning.Models
         public int ChapterID { get; set; }
         public string LessonName { get; set; }
         public string LessonURL { get; set; }
-        public TimeSpan Duration { get; set; }
+        public int Duration { get; set; }
         public int Is_active { get; set; }
         public int Is_deleted { get; set; }
         public DateTime Create_at { get; set; }

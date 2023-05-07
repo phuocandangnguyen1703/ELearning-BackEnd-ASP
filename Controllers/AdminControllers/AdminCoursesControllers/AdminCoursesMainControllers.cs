@@ -3,7 +3,6 @@
 using ELearning.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using ELearning.Commons.Constants;
 using ELearning.DTOs.Course;
 using ELearning.Commons;
@@ -32,7 +31,7 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
             var list = await (from n in _elearningContext.Courses
                               orderby n.ID ascending
                               select n).ToListAsync();
-            return StatusCode(200, Json(list));
+            return StatusCode(200, list);
         }
 
         [Route("admin/courses/main/delete/{id}")]
@@ -41,7 +40,8 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
         {
             var s = await _elearningContext.Courses.SingleAsync(x => x.ID == id);
             _elearningContext.Remove(s);
-            return StatusCode(200, Json(ErrorCode.SUCCESS));
+            await _elearningContext.SaveChangesAsync();
+            return StatusCode(200, s);
         }
 
         [Route("admin/courses/main/find/{id}")]
@@ -49,10 +49,10 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
         public async Task<IActionResult> Find([FromRoute] int id)
         {
             var CourseData = await (from x in _elearningContext.Courses
-                                     where x.ID == id
-                                     select x).FirstOrDefaultAsync();
+                                    where x.ID == id
+                                    select x).FirstOrDefaultAsync();
             if (CourseData == null) return StatusCode(404);
-            return StatusCode(200, Json(new { Course = CourseData }));
+            return StatusCode(200, CourseData);
         }
 
         [Route("admin/courses/main/create")]
@@ -71,11 +71,11 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
             newCourse.CourseImage = "course/image.jpeg";
 
             await _elearningContext.AddAsync(newCourse);
-            await _elearningContext.SaveChangesAsync();
+            await _elearningContext.SaveChangesAsync(); 
 
             await ELearning.Commons.ImageHandler.SaveImageAsync(image, "courses", "image", _env);
 
-            return StatusCode(200, Json(new { Course = newCourse }));
+            return StatusCode(200, newCourse);
         }
     }
 }
