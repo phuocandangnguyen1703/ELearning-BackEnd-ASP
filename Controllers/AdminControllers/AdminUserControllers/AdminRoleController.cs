@@ -34,7 +34,7 @@ namespace ELearning.Controllers.AdminControllers.AdminUserControllers
             return StatusCode(200, list);
         }
 
-        [Route("/role/delete/{id}")]
+        [Route("admin/role/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
@@ -43,7 +43,7 @@ namespace ELearning.Controllers.AdminControllers.AdminUserControllers
             return StatusCode(200, Json(ErrorCode.SUCCESS));
         }
 
-        [Route("/role/find/{id}")]
+        [Route("admin/role/find/{id}")]
         [HttpGet]
         public async Task<IActionResult> Find([FromRoute] int id)
         {
