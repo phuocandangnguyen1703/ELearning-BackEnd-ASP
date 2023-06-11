@@ -43,8 +43,6 @@ namespace ELearning.Models
         [JsonIgnore]
         public virtual ICollection<Learning> Learnings { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Course> Courses { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Approval> Approvals { get; set; }
         [JsonIgnore]
         public virtual ICollection<Review> Reviews { get; set; }

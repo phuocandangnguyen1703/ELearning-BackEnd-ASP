@@ -23,11 +23,6 @@ namespace ELearning.Models
         public DateTime Create_at { get; set; }
         public DateTime Update_at { get; set; }
 
-
-        [JsonIgnore]
-        public virtual ICollection<Course> Courses { get; set; }
-
-
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

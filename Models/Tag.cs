@@ -8,24 +8,20 @@ using Newtonsoft.Json;
 
 namespace ELearning.Models
 {
-    public partial class Require
+    public partial class Tag
     {
 
-        public Require()
+        public Tag()
         {
 
         }
-
         public int ID { get; set; }
         public int CourseID { get; set; }
-        public string Content { get; set; }
-        public int Is_active { get; set; }
+        public string TagName { get; set; }
         public int Is_deleted { get; set; }
         public DateTime Create_at { get; set; }
         public DateTime Update_at { get; set; }
 
-        [JsonIgnore]
-        public virtual Course CourseNavigation { get; set; }
 
         public override string ToString()
         {
