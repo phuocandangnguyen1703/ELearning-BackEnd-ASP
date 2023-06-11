@@ -7,16 +7,16 @@ using Newtonsoft.Json;
 using ELearning.Commons.Constants;
 using ELearning.DTOs.Course;
 
-namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminRequireController
+namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminTagController
 {
     [ApiController]
 
-    public class AdminRequireController : Controller
+    public class AdminTagController : Controller
     {
-        private readonly ILogger<AdminRequireController> _logger;
+        private readonly ILogger<AdminTagController> _logger;
         private readonly IWebHostEnvironment _env;
         private readonly ElearningContext _elearningContext;
-        public AdminRequireController(ILogger<AdminRequireController> logger, IWebHostEnvironment env, ElearningContext elearningContext)
+        public AdminTagController(ILogger<AdminTagController> logger, IWebHostEnvironment env, ElearningContext elearningContext)
         {
             _logger = logger;
             _env = env;
@@ -24,44 +24,44 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminReq
         }
 
 
-        [Route("/require/all")]
+        [Route("admin/tag/all")]
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var list = await (from n in _elearningContext.Requires
+            var list = await (from n in _elearningContext.Tag
                               orderby n.ID ascending
                               select n).ToListAsync();
-            return StatusCode(200, Json(list));
+            return StatusCode(200, list);
         }
 
-        [Route("/require/delete/{id}")]
+        [Route("/tag/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var s = await _elearningContext.Requires.SingleAsync(x => x.ID == id);
+            var s = await _elearningContext.Tag.SingleAsync(x => x.ID == id);
             _elearningContext.Remove(s);
             return StatusCode(200, Json(ErrorCode.SUCCESS));
         }
 
-        [Route("/require/find/{id}")]
+        [Route("/tag/find/{id}")]
         [HttpGet]
         public async Task<IActionResult> Find([FromRoute] int id)
         {
-            var RequireData = await (from x in _elearningContext.Requires
+            var RequireData = await (from x in _elearningContext.Tag
                                      where x.ID == id
                                      select x).FirstOrDefaultAsync();
             if (RequireData == null) return StatusCode(404);
             return StatusCode(200, Json(new { Require = RequireData }));
         }
 
-        [Route("/require/create")]
+        [Route("/tag/create")]
         [HttpPost]
-        public async Task<IActionResult> Create(RequireDTO data)
+        public async Task<IActionResult> Create(TagDTO data)
         {
-            Require newRequire = new();
+            Tag newRequire = new();
 
             newRequire.CourseID = data.CourseID;
-            newRequire.Content = data.Content;
+            newRequire.TagName = data.TagName;
 
             await _elearningContext.AddAsync(newRequire);
             await _elearningContext.SaveChangesAsync();

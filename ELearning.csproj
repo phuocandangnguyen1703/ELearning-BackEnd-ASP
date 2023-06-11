@@ -8,6 +8,16 @@
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Controllers\CommonControllers\**" />
+	  <Compile Remove="Controllers\WebsiteControllers\**" />
+	  <Content Remove="Controllers\CommonControllers\**" />
+	  <Content Remove="Controllers\WebsiteControllers\**" />
+	  <EmbeddedResource Remove="Controllers\CommonControllers\**" />
+	  <EmbeddedResource Remove="Controllers\WebsiteControllers\**" />
+	  <None Remove="Controllers\CommonControllers\**" />
+	  <None Remove="Controllers\WebsiteControllers\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="MailKit" Version="4.0.0" />
 		<PackageReference Include="MimeKit" Version="4.0.0" />
@@ -30,8 +40,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Commons\Constants\" />
-		<Folder Include="Controllers\CommonControllers\" />
-		<Folder Include="Controllers\WebsiteControllers\" />
 		<Folder Include="Controllers\AdminControllers\AdminLessonsControllers\" />
 	</ItemGroup>
 </Project>

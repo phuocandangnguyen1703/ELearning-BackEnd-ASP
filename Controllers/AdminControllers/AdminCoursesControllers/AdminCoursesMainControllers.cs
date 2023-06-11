@@ -34,6 +34,7 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
             return StatusCode(200, list);
         }
 
+
         [Route("admin/courses/main/delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromRoute] int id)
@@ -43,6 +44,11 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
             await _elearningContext.SaveChangesAsync();
             return StatusCode(200, s);
         }
+
+
+
+
+
 
         [Route("admin/courses/main/find/{id}")]
         [HttpGet]
@@ -60,14 +66,11 @@ namespace ELearning.Controllers.AdminControllers.AdminCourseControllers.AdminCou
         public async Task<IActionResult> Create([FromForm] CourseDTO data, [FromForm] IFormFile image)
         {
             Course newCourse = new();
-
             //newCourse.AuthorID = 0;
             newCourse.CourseTypeID = data.CourseTypeID;
             newCourse.CourseName = data.CourseName;
             newCourse.CourseFee = data.CourseFee;
             newCourse.Description = data.Description;
-            newCourse.CourseState = data.CourseState;
-            newCourse.Commission = data.Commission;
             newCourse.CourseImage = "course/image.jpeg";
 
             await _elearningContext.AddAsync(newCourse);

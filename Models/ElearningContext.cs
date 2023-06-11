@@ -28,10 +28,12 @@ namespace ELearning.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Learning> Learnings { get; set; }
         public virtual DbSet<MainType> MainTypes { get; set; }
-        public virtual DbSet<Require> Requires { get; set; }
+        public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
         public virtual DbSet<Lesson> Lessons{ get; set; }
         public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<CourseMix> CourseMix { get; set; }
+
 
 
         private const string connectionString = @"Server = 112.78.4.41; Port = 3306; UserID = ftisu;Password = ftisu@2022; Database=elearning;";
@@ -334,12 +336,6 @@ namespace ELearning.Models
                  .OnDelete(DeleteBehavior.ClientSetNull);
                 //.HasConstraintName("FK_REVIEW_REFERENCE_USER");
 
-                entity.HasOne(d => d.CourseNavigation)
-                 .WithMany(f => f.Reviews)
-                 .HasForeignKey(d => d.CourseID)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-                //.HasConstraintName("FK_REVIEW_REFERENCE_COURSE");
-
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
                     .HasDefaultValueSql("0");
@@ -393,12 +389,6 @@ namespace ELearning.Models
                  .OnDelete(DeleteBehavior.ClientSetNull);
                 //.HasConstraintName("FK_APPROVAL_REFERENCE_USER");
 
-                entity.HasOne(d => d.CourseNavigation)
-                 .WithMany(f => f.Approvals)
-                 .HasForeignKey(d => d.CourseID)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-                //.HasConstraintName("FK_APPROVAL_REFERENCE_COURSE");
-
                 entity.Property(e => e.Is_active)
                     .HasDefaultValueSql("1")
                     .HasColumnName("is_active");
@@ -420,10 +410,10 @@ namespace ELearning.Models
 
             });
 
-            modelBuilder.Entity<Require>(entity =>
+            modelBuilder.Entity<Tag>(entity =>
             {
 
-                entity.ToTable("requires");
+                entity.ToTable("tag");
 
                 entity.HasKey(e => e.ID);
 
@@ -434,14 +424,10 @@ namespace ELearning.Models
                 entity.Property(e => e.CourseID)
                     .HasColumnName("course_id");
 
-                entity.Property(e => e.Content)
+                entity.Property(e => e.TagName)
                   .HasMaxLength(2000)
-                  .IsUnicode(true)
-                  .HasColumnName("content");
+                  .HasColumnName("tag_name");
 
-                entity.Property(e => e.Is_active)
-                    .HasDefaultValueSql("1")
-                    .HasColumnName("is_active");
 
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
@@ -458,11 +444,6 @@ namespace ELearning.Models
                     .HasColumnType("timestamp")
                     .HasColumnName("update_at");
 
-                entity.HasOne(d => d.CourseNavigation)
-                 .WithOne(f => f.RequireNavigation)
-                 .HasForeignKey<Require>(d => d.CourseID)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-                //.HasConstraintName("FK_REQUIRE_REFERENCE_COURSE");
 
             });
 
@@ -485,11 +466,6 @@ namespace ELearning.Models
                     .IsUnicode(true)
                     .HasColumnName("chapter_name");
 
-                entity.HasOne(d => d.CourseNavigation)
-                 .WithMany(f => f.Chapters)
-                 .HasForeignKey(d => d.CourseID)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-                //.HasConstraintName("FK_CHAPTER_REFERENCE_COURSE");
 
                 entity.Property(e => e.Is_active)
                     .HasDefaultValueSql("1")
@@ -564,40 +540,37 @@ namespace ELearning.Models
                 entity.Property(e => e.CourseTypeID)
                     .HasColumnName("course_type_id");
 
+                entity.Property(e => e.CourseAuthorID)
+                    .HasColumnName("course_author_id");
+
+                entity.Property(e => e.CourseLevelID)
+                    .HasColumnName("course_level_id");
+
+                entity.Property(e => e.CourseLanguageID)
+                  .HasColumnName("course_language_id");
+
+                entity.Property(e => e.ApprovalStatus)
+                 .HasColumnName("approval_status");
 
                 entity.Property(e => e.CourseName)
                     .HasMaxLength(200)
-                    .IsUnicode(true)
                     .HasColumnName("course_name");
 
                 entity.Property(e => e.CourseImage)
                     .HasMaxLength(2000)
-                    .IsUnicode(true)
                     .HasColumnName("course_image");
 
 
                 entity.Property(e => e.CourseFee)
                     .HasColumnName("course_fee");
 
-                entity.Property(e => e.CourseState)
-                   .HasColumnName("course_state");
+                entity.Property(e => e.Description)
+                    .HasColumnName("description");
 
-                entity.Property(e => e.Commission)
-                .HasMaxLength(200)
-                .IsUnicode(true)
-                .HasColumnName("commission");
 
-                //entity.HasOne(d => d.AuthorNavigation)
-                // .WithMany(f => f.Courses)
-                // .HasForeignKey(d => d.AuthorID)
-                // .OnDelete(DeleteBehavior.ClientSetNull);
-                //.HasConstraintName("FK_COURSE_REFERENCE_USER");
+                entity.Property(e => e.CourseStatus)
+                 .HasColumnName("course_status");
 
-                entity.HasOne(d => d.MainTypeNavigation)
-                 .WithMany(f => f.Courses)
-                 .HasForeignKey(d => d.CourseTypeID)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-                //.HasConstraintName("FK_COURSE_REFERENCE_MAINTYPE");
 
                 entity.Property(e => e.Is_active)
                    .HasDefaultValueSql("1")
@@ -606,6 +579,67 @@ namespace ELearning.Models
                 entity.Property(e => e.Is_deleted)
                     .HasColumnName("is_deleted")
                     .HasDefaultValueSql("0");
+
+                entity.Property(e => e.Create_at)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("create_at");
+
+                entity.Property(e => e.Update_at)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .HasColumnType("timestamp")
+                    .HasColumnName("update_at");
+
+            });
+
+            modelBuilder.Entity<CourseMix>(entity =>
+            {
+
+                entity.HasKey(e => e.ID);
+
+                entity.Property(p => p.ID)
+                    .HasColumnName("id")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CourseName)
+                    .HasColumnName("course_name");
+
+                entity.Property(e => e.TypeName)
+                    .HasColumnName("type_name");
+
+                entity.Property(e => e.StatusName)
+                    .HasColumnName("status_name");
+
+                entity.Property(e => e.AuthorName)
+                  .HasColumnName("author_name");
+
+                entity.Property(e => e.ReviewStar)
+                 .HasColumnName("average_review_star");
+
+                entity.Property(e => e.CourseImage)
+                    .HasMaxLength(2000)
+                    .HasColumnName("course_image");
+
+                entity.Property(e => e.LevelName)
+                   .HasMaxLength(2000)
+                   .HasColumnName("level_name");
+
+                entity.Property(e => e.LanguageName)
+                   .HasMaxLength(2000)
+                   .HasColumnName("language_name");
+
+                entity.Property(e => e.CourseFee)
+                    .HasColumnName("course_fee");
+
+                entity.Property(e => e.Tags)
+                    .HasColumnName("tags");
+
+                entity.Property(e => e.EnrollmentCount)
+                    .HasColumnName("enrollment_count");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description");
 
                 entity.Property(e => e.Create_at)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
